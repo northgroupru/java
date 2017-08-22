@@ -33,7 +33,7 @@ dependencies {
     compile "org.postgresql:postgresql:9.4.1211"
 
     compile "org.eclipse.persistence:eclipselink:2.6.4"
-    //compile "org.springframework.boot:spring-boot-starter-security"
+    compile "org.springframework.boot:spring-boot-starter-security"
 
     testCompile("junit:junit")
 }

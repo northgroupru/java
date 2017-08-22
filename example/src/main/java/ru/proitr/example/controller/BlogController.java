@@ -8,12 +8,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import ru.proitr.example.bean.URL;
 import ru.proitr.example.domain.Test1;
 import ru.proitr.example.repository.Test1Repository;
 
-import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -59,7 +59,7 @@ public class BlogController
         return "freemarker/index";
     }
 
-    @RequestMapping(value = "/admin")
+    @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public ModelAndView getAdminPage()
     {
         ModelAndView model = new ModelAndView();
@@ -69,7 +69,7 @@ public class BlogController
         return model;
     }
 
-    @RequestMapping(value = "/manager")
+    @RequestMapping(value = "/manager", method = RequestMethod.GET)
     public ModelAndView getManagerPage()
     {
         ModelAndView model = new ModelAndView();
@@ -79,7 +79,7 @@ public class BlogController
         return model;
     }
 
-    @RequestMapping(value = "/anonymouse")
+    @RequestMapping(value = "/anonymouse", method = RequestMethod.GET)
     public ModelAndView getAnonymousePage()
     {
         ModelAndView model = new ModelAndView();
