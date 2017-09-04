@@ -6,4 +6,5 @@ package ru.proitr.example.domain;
 public class MainConstants
 {
 	public static final String AUTH_SCHEMA_NAME = "auth";
+	public static final String SESSION_COOKIE_NAME = "EXAMPLE_SESSION";
 }

@@ -14,5 +14,7 @@ dfdasf dsf dsf dsf dasf dasf
 <#--</#list>-->
 </ul>
 test
+
+Click here for <a href="/login" >Login</a>
 </body>
 </html>
