@@ -16,5 +16,8 @@ dfdasf dsf dsf dsf dasf dasf
 test
 
 Click here for <a href="/login" >Login</a>
+
+
+Dear ${user}, you are successfully logged into this application.
 </body>
 </html>

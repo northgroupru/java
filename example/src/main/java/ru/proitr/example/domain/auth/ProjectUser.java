@@ -17,7 +17,7 @@ public class ProjectUser extends IdGeneratedEntity
 	@Column(unique = true, nullable = false)
 	private String login;
 
-	@Column(nullable = false)
+	@Column(nullable = false, name = "PASSWORD")
 	private String password;
 
 	@Column(name = "first_name")
@@ -30,15 +30,16 @@ public class ProjectUser extends IdGeneratedEntity
 	private String email;
 
 	@Column(name = "is_enabled", nullable = false)
-	private byte enabled;
+	private int enabled;
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(
 			name = "user_roles",
+			schema = MainConstants.AUTH_SCHEMA_NAME,
 			joinColumns = @JoinColumn(name = "user_id"),
 			inverseJoinColumns = @JoinColumn(name = "role_id")
 	)
-	private Set<Roles> roles = new HashSet<>();
+	private Set<Role> roles = new HashSet<>();
 
 	public String getLogin()
 	{
@@ -90,22 +91,22 @@ public class ProjectUser extends IdGeneratedEntity
 		this.email = email;
 	}
 
-	public byte getEnabled()
+	public int getEnabled()
 	{
 		return enabled;
 	}
 
-	public void setEnabled(byte enabled)
+	public void setEnabled(int enabled)
 	{
 		this.enabled = enabled;
 	}
 
-	public Set<Roles> getRoles()
+	public Set<Role> getRoles()
 	{
 		return roles;
 	}
 
-	public void setRoles(Set<Roles> roles)
+	public void setRoles(Set<Role> roles)
 	{
 		this.roles = roles;
 	}

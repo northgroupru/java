@@ -1,5 +1,6 @@
 package ru.proitr.example.service.auth;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -8,7 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ru.proitr.example.domain.auth.ProjectUser;
-import ru.proitr.example.domain.auth.Roles;
+import ru.proitr.example.domain.auth.Role;
 import ru.proitr.example.repository.UserRepository;
 
 import java.util.ArrayList;
@@ -20,12 +21,13 @@ import java.util.List;
 @Service
 public class LoginService implements UserDetailsService
 {
+	@Autowired
 	private UserRepository userRepository;
 
 	@Override
-	public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
 	{
-	 	ProjectUser user = userRepository.findByLoginIgnoreCase(login);
+	 	ProjectUser user = userRepository.findByLoginIgnoreCase(username);
 
 	 	if (user == null || user.getEnabled() == 0)
 		{
@@ -38,7 +40,7 @@ public class LoginService implements UserDetailsService
 		{
 			if (user.getRoles() != null)
 			{
-				for (Roles role : user.getRoles())
+				for (Role role : user.getRoles())
 				{
 					authorities.add(new SimpleGrantedAuthority(role.getId().toString()));
 				}

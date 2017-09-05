@@ -12,15 +12,13 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import ru.proitr.example.bean.URL;
-import ru.proitr.example.domain.Test1;
-import ru.proitr.example.repository.Test1Repository;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 @Controller
 @Transactional
@@ -29,9 +27,7 @@ public class BlogController
 {
     private static Logger log = LoggerFactory.getLogger(BlogController.class);
 
-    @Autowired private Test1Repository test1Repository;
     @Autowired private URL url;
-    //@Autowired private PersistentTokenBasedRememberMeServices persistentTokenBasedRememberMeServices;
 
     @RequestMapping("/")
     public String getBlog(Model mv)
@@ -40,6 +36,7 @@ public class BlogController
         mv.addAttribute("title", "Freemarker Template Demo using Spring");
         mv.addAttribute("message", "Getting started with Freemarker.<br/>Find a Freemarker templates demo using Spring.");
         mv.addAttribute("references", url.getUrlList());
+        mv.addAttribute("user", getUser());
         log.info("end");
 
         return "freemarker/index";
@@ -50,8 +47,6 @@ public class BlogController
     {
         try
         {
-            List<Test1> dat = test1Repository.findTest1("Ivanov");
-            //Test1 dat = test1Repository.findOne("1");
             log.info("end list1");
         }
         catch (BeanCreationException ex)
@@ -86,7 +81,7 @@ public class BlogController
         return model;
     }
 
-    @RequestMapping(value = "/anonymouse", method = RequestMethod.GET)
+    @RequestMapping(value = "/anonymouse", method = RequestMethod.POST)
     public ModelAndView getAnonymousePage()
     {
         ModelAndView model = new ModelAndView();
@@ -98,10 +93,21 @@ public class BlogController
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public ModelAndView login()
+    public ModelAndView login(@RequestParam(value = "error",required = false) String error,
+                              @RequestParam(value = "logout",	required = false) String logout)
     {
         ModelAndView model = new ModelAndView();
-        model.addObject("loginUrl","/");
+
+        if (error != null)
+        {
+            model.addObject("error", "Invalid Credentials provided.");
+        }
+
+        if (logout != null)
+        {
+            model.addObject("message", "Logged out from JournalDEV successfully.");
+        }
+
         model.setViewName("freemarker/auth/login");
 
         return model;
