@@ -1,15 +1,19 @@
 package ru.proitr.example.domain;
 
+import org.eclipse.persistence.annotations.Cache;
+import org.eclipse.persistence.config.CacheIsolationType;
+
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 
+@Cache(shared = false, isolation = CacheIsolationType.ISOLATED)
 @MappedSuperclass
 public class IdGeneratedEntity implements Serializable
 {
-	private static final long serialVersionUID = -777888999000L;
+	private static final long serialVersionUID = -2313013958761804478L;
 
 	@Id
 	@GeneratedValue(generator = "system-uuid")

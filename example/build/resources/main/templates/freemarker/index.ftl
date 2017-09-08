@@ -3,21 +3,18 @@
     <title>${title}</title>
 </head>
 <body>
-dfdasf dsf dsf dsf dasf dasf
-<h1>${title}</h1>
-
-<p>${message} by ${message}</p>
+<h1>Базовый ссылки</h1>
 
 <ul>
-<#--<#list systems as system>-->
-    <#--<li>${system_index + 1}. ${system.name} from ${system.developer}</li>-->
-<#--</#list>-->
+    <li><a href="/login" >Авторизация</a></li>
+    <li><a href="/registration" >Регистрация</a></li>
+
 </ul>
-test
 
-Click here for <a href="/login" >Login</a>
+<#if (user??)>
+    Dear ${user}, you are successfully logged into this application.
+</#if>
 
 
-Dear ${user}, you are successfully logged into this application.
 </body>
 </html>

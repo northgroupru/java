@@ -6,6 +6,7 @@ import ru.proitr.example.domain.MainConstants;
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Consumer;
 
 /**
  * Created by Gainutdinov on 22.08.17.
@@ -14,6 +15,8 @@ import java.util.Set;
 @Table(schema = MainConstants.AUTH_SCHEMA_NAME, name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = {"login"})})
 public class ProjectUser extends IdGeneratedEntity
 {
+	private static final long serialVersionUID = -4840628900773206343L;
+
 	@Column(unique = true, nullable = false)
 	private String login;
 
@@ -113,5 +116,41 @@ public class ProjectUser extends IdGeneratedEntity
 
 	public ProjectUser()
 	{
+	}
+
+	public ProjectUser(String login, String password, String firstName, String lastName, String email, int enabled, Set<Role> roles)
+	{
+		this.login = login;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.enabled = enabled;
+		this.roles = roles;
+	}
+
+	public ProjectUser(ProjectUser projectUser)
+	{
+		super(projectUser);
+
+		setLogin(projectUser.getLogin());
+		setFirstName(projectUser.getFirstName());
+		setLastName(projectUser.getLastName());
+		setEmail(projectUser.getEmail());
+		setEnabled(projectUser.getEnabled());
+		setRoles(projectUser.getRoles());
+	}
+
+	public ProjectUser(String id)
+	{
+		super(id);
+	}
+
+	public static ProjectUser ProjectUser(Consumer<ProjectUser> consumer)
+	{
+		ProjectUser projectUser = new ProjectUser();
+		consumer.accept(projectUser);
+
+		return projectUser;
 	}
 }

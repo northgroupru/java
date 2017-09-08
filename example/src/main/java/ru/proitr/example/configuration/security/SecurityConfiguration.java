@@ -21,7 +21,7 @@ import ru.proitr.example.domain.MainConstants;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter
 {
-	private static final String[] UNSECURED_RESOURCE_LIST = new String[]{"/login**", "/"};
+	private static final String[] UNSECURED_RESOURCE_LIST = new String[]{"/login**", "/", "/registration**"};
 
 	@Bean
 	public PasswordEncoder passwordEncoder()
