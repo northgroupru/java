@@ -3,6 +3,7 @@ package ru.proitr.example.controller;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -54,7 +55,6 @@ public class GlobalExceptionHandler
 						validationError.setDescription(ProjectValidationUtils.getErrorMessage(validationError.getCode()));
 					}
 				}
-
 			}
 		}
 		else
@@ -69,7 +69,15 @@ public class GlobalExceptionHandler
 		}
 
 		return getResponseObject(request, response, resp);
+	}
 
+	@ExceptionHandler(HttpMessageNotReadableException.class)
+	public Object handleHttpMessageNotReadable(HttpServletRequest request, HttpServletResponse response, HttpMessageNotReadableException ex)
+	{
+		ProjectStatusCode projectStatusCode = ProjectStatusCode.ILLEGAL_DATA_FORMAT;
+		ApiResponse<Object> resp = new ApiResponse<>(projectStatusCode);
+
+		return getResponseObject(request, response, resp);
 	}
 
 	private Object getResponseObject(HttpServletRequest request, HttpServletResponse response, ApiResponse<Object> resp)
@@ -79,7 +87,7 @@ public class GlobalExceptionHandler
 			Map<String, Object> model = new HashMap<>();
 			model.put("data", resp);
 
-			return new ModelAndView("exception/error", model);
+			return new ModelAndView("freemarker/exception/error", model);
 		}
 		else
 		{

@@ -16,7 +16,8 @@ public class Role implements Serializable
 {
 	@Id
 	@Column(unique = true, nullable = false)
-	private String id;
+	@Enumerated(EnumType.STRING)
+	private RolesEnum id;
 
 	@Column
 	private String name;
@@ -29,12 +30,12 @@ public class Role implements Serializable
 
 	}
 
-	public String getId()
+	public RolesEnum getId()
 	{
 		return id;
 	}
 
-	public void setId(String id)
+	public void setId(RolesEnum id)
 	{
 		this.id = id;
 	}

@@ -7,7 +7,8 @@ public enum ProjectStatusCode
 {
 	OK(0, "Операция выполнена успешно"),
 	ILLEGAL_INPUT(1, "Некорректные входные данные"),
-	UNKNOWN_ERROR(2, "Неизвестная ошибка");
+	UNKNOWN_ERROR(2, "Неизвестная ошибка"),
+	ILLEGAL_DATA_FORMAT(3, "Некорректный формат данных");
 
 	private int code;
 	private String message;

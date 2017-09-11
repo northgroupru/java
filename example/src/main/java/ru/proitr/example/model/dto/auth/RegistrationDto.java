@@ -1,5 +1,6 @@
 package ru.proitr.example.model.dto.auth;
 
+import ru.proitr.example.domain.auth.RolesEnum;
 import ru.proitr.example.utils.ProjectValidationErrors;
 
 import javax.validation.constraints.NotNull;
@@ -22,5 +23,5 @@ public class RegistrationDto
 	@NotNull(message = ProjectValidationErrors.FIELD_EMPTY)
 	public String password;
 
-	public ArrayList<String> roles;
+	public ArrayList<RolesEnum> roles;
 }

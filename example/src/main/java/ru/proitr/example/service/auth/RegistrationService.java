@@ -5,6 +5,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.proitr.example.domain.auth.ProjectUser;
 import ru.proitr.example.domain.auth.Role;
+import ru.proitr.example.domain.auth.RolesEnum;
 import ru.proitr.example.repository.RoleRepository;
 import ru.proitr.example.repository.UserRepository;
 
@@ -23,7 +24,7 @@ public class RegistrationService
 
 	@Autowired private PasswordEncoder passwordEncoder;
 
-	private ProjectUser registrUser(String login, String firstName, String lastName, String email, String password, ArrayList<String> roles)
+	private ProjectUser registrUser(String login, String firstName, String lastName, String email, String password, ArrayList<RolesEnum> roles)
 	{
 		Set<Role> roleIds = new HashSet<>();
 
@@ -38,7 +39,7 @@ public class RegistrationService
 		return projectUser;
 	}
 
-	public void registr(String login, String firstName, String lastName, String email, String password, ArrayList<String> roles)
+	public void registr(String login, String firstName, String lastName, String email, String password, ArrayList<RolesEnum> roles)
 	{
 		if (password != null)
 		{

@@ -5,5 +5,29 @@ package ru.proitr.example.domain.auth;
  */
 public enum RolesEnum
 {
-	ANONYMOUSE, MANAGER, ADMIN
+	ANONYMOUSE("ANONYMOUSE", "Анонимный пользователь"),
+	MANAGER("MANAGER","Менеджер проектов"),
+	ADMIN("ADMIN","Администратор");
+
+	private String code;
+
+	private String name;
+
+	RolesEnum(String code, String name)
+	{
+		this.code = code;
+		this.name = name;
+	}
+
+	public String getCode()
+	{
+		return code;
+	}
+
+	public String getName()
+	{
+		return name;
+	}
+
+
 }

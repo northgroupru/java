@@ -2,6 +2,7 @@ package ru.proitr.example.repository;
 
 import org.springframework.stereotype.Repository;
 import ru.proitr.example.domain.auth.Role;
+import ru.proitr.example.domain.auth.RolesEnum;
 
 import java.util.List;
 import java.util.Set;
@@ -12,5 +13,5 @@ import java.util.Set;
 @Repository
 public interface RoleRepository extends CustomJpaRepository<Role, String>
 {
-	Set<Role> findByIdIn(List<String> ids);
+	Set<Role> findByIdIn(List<RolesEnum> ids);
 }

@@ -26,7 +26,13 @@
             <input type="text" class="form-control" name="firstName" placeholder="First name" required>
             <input type="text" class="form-control" name="lastName" placeholder="Last name">
             <input type="text" class="form-control" name="email" placeholder="Email">
-            <input type="text" class="form-control" name="roles" placeholder="roles">
+
+            <select class="form-control" name="roles">
+                <#list enumRoles as enumRole>
+                    <option value="${enumRole.getCode()}">${enumRole.getName()}</option>
+                </#list>
+            </select>
+
             <input type="password" class="form-control" name="password" placeholder="Password" required>
             <button class="btn btn-lg btn-primary btn-block" type="button" onclick="AuthManager.registr()">Зарегистрироваться</button>
         </form>

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ru.proitr.example.domain.auth.ProjectUser;
+import ru.proitr.example.domain.auth.RolesEnum;
 import ru.proitr.example.exception.ProjectException;
 import ru.proitr.example.model.dto.auth.RegistrationDto;
 import ru.proitr.example.model.status.ProjectStatusCode;
@@ -73,6 +74,7 @@ public class AuthController
 	public String registration(Model model)
 	{
 		model.addAttribute("projectUser", new ProjectUser());
+		model.addAttribute("enumRoles", RolesEnum.values());
 
 		return "freemarker/auth/registration";
 	}

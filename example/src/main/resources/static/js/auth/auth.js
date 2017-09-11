@@ -11,7 +11,7 @@ function AuthManager_F()
             'lastName': $('input[name="lastName"]').val(),
             'email': $('input[name="email"]').val(),
             'password': $('input[name="password"]').val(),
-            'roles':[$('input[name="roles"]').val()]
+            'roles':[$('select[name="roles"]').val()]
         }
 
         MainManager.ajaxJSON("/registration", dat);
