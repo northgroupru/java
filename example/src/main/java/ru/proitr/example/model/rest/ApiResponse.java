@@ -14,6 +14,8 @@ import java.util.List;
  */
 public class ApiResponse<T> implements Serializable
 {
+	private static final long serialVersionUID = 4206019900770090420L;
+
 	private String message;
 	private Integer status;
 

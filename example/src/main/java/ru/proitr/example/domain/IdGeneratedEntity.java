@@ -13,7 +13,7 @@ import java.io.Serializable;
 @MappedSuperclass
 public class IdGeneratedEntity implements Serializable
 {
-	private static final long serialVersionUID = -2313013958761804478L;
+	private static final long serialVersionUID = 8270983001758811282L;
 
 	@Id
 	@GeneratedValue(generator = "system-uuid")

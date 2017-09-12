@@ -7,6 +7,8 @@ import java.io.Serializable;
  */
 public class ApiValidationError implements Serializable
 {
+	private static final long serialVersionUID = -1667852182550481267L;
+
 	private String resource;
 
 	private String field;

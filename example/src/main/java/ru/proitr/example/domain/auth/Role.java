@@ -14,6 +14,8 @@ import java.util.Set;
 @Table(name = "role", schema = MainConstants.AUTH_SCHEMA_NAME)
 public class Role implements Serializable
 {
+	private static final long serialVersionUID = 5925167673108763686L;
+
 	@Id
 	@Column(unique = true, nullable = false)
 	@Enumerated(EnumType.STRING)
@@ -27,7 +29,6 @@ public class Role implements Serializable
 
 	public Role()
 	{
-
 	}
 
 	public RolesEnum getId()
