@@ -3,8 +3,6 @@ package ru.proitr.example.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -13,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import ru.proitr.example.bean.URL;
+import ru.proitr.example.utils.ProjectUtils;
 
 @Controller
 @Transactional
@@ -30,7 +29,7 @@ public class BlogController
         mv.addAttribute("title", "Freemarker Template Demo using Spring");
         mv.addAttribute("message", "Getting started with Freemarker.<br/>Find a Freemarker templates demo using Spring.");
         mv.addAttribute("references", url.getUrlList());
-        mv.addAttribute("user", getUser());
+        mv.addAttribute("user", ProjectUtils.getLogin());
         log.info("end");
 
         return "freemarker/index";
@@ -41,7 +40,7 @@ public class BlogController
     {
         ModelAndView model = new ModelAndView();
         model.addObject("message","This admin page");
-        model.addObject("user", getUser());
+        model.addObject("user", ProjectUtils.getLogin());
         model.setViewName("freemarker/auth/admin");
 
         return model;
@@ -52,7 +51,7 @@ public class BlogController
     {
         ModelAndView model = new ModelAndView();
         model.addObject("message","This manager page");
-        model.addObject("user", getUser());
+        model.addObject("user", ProjectUtils.getLogin());
         model.setViewName("freemarker/auth/manager");
 
         return model;
@@ -63,26 +62,9 @@ public class BlogController
     {
         ModelAndView model = new ModelAndView();
         model.addObject("message","This anonymouse page");
-        model.addObject("user", getUser());
+        model.addObject("user", ProjectUtils.getLogin());
         model.setViewName("freemarker/auth/anonymouse");
 
         return model;
-    }
-
-    private String getUser()
-    {
-        String userName = "";
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        if (principal instanceof UserDetails)
-        {
-            userName = ((UserDetails) principal).getUsername();
-        }
-        else
-        {
-            userName = principal.toString();
-        }
-
-        return userName;
     }
 }
