@@ -19,11 +19,21 @@ public class TestService
 {
 	@Autowired private UserRepository userRepository;
 
-	@Cacheable(value = "userRoles")
+	@Cacheable(value = "userRolesDefault")
 	public List<RolesEnum> getUserRoles()
 	{
 		List<RolesEnum> result = new ArrayList<>();
 		List<Role> roles = userRepository.getProjectUserRolesByLogin(ProjectUtils.getLogin());
+		roles.stream().forEach(role -> {result.add(role.getId());});
+
+		return result;
+	}
+
+	@Cacheable(value = "userRoles", key = "#login")
+	public List<RolesEnum> getUserRoles(String login)
+	{
+		List<RolesEnum> result = new ArrayList<>();
+		List<Role> roles = userRepository.getProjectUserRolesByLogin(login);
 		roles.stream().forEach(role -> {result.add(role.getId());});
 
 		return result;
