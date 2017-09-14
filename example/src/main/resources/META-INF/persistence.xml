@@ -3,5 +3,8 @@
     <persistence-unit name="example_persistence_unit">
         <class>ru.proitr.example.domain.auth.ProjectUser</class>
         <class>ru.proitr.example.domain.auth.Role</class>
+        <class>ru.proitr.example.domain.test.TestData</class>
+
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
     </persistence-unit>
 </persistence>
