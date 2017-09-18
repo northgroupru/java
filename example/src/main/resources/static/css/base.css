@@ -1,0 +1,94 @@
+.wrap {
+    overflow: hidden;
+    width: 100%;
+    min-height: 100%;
+    min-width: 1340px;
+    position: relative;
+    padding-bottom: 290px;
+    padding-top: 110px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing:    border-box;
+    box-sizing:         border-box;
+}
+.hide {
+    display: none !important;
+}
+.row {
+    width: 1340px;
+    margin: 0 auto 0 auto;
+    position: relative;
+    display: block;
+    clear: both;
+}
+.row:after, .row:before {
+    content: "";
+    display: table;
+    clear: both;
+}
+.table-block {
+    display: table;
+    width: 100%;
+}
+.table-row {
+    display: table-row;
+}
+.table-cell {
+    display: table-cell;
+    white-space: initial;
+    word-break: break-word;
+    word-wrap: break-word;
+}
+.table-block.init .table-cell {
+    border-bottom: 1px solid #ccc;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    line-height: 22px;
+    vertical-align: top;
+    padding-right: 30px;
+}
+.table-block.init .table-row:first-child .table-cell {
+    font-size: 14px;
+    white-space: nowrap;
+    font-style: italic;
+}
+.column-main, .column-side {
+    display: block;
+    float: left;
+}
+
+
+.column-main {
+    width: 70%
+}
+.column-side {
+    width: 30%
+}
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+}
+h1, h2, h3, h4 {
+    font-family: 'Intro Bold';
+    font-weight: normal;
+    text-transform: uppercase;
+    line-height: normal;
+}
+h1 {
+    font-size: 42px;
+    line-height: 48px;
+}
+h2 {}
+h3 {
+    font-size: 17px;
+    line-height: 22px;
+}
+h4 {
+    font-size: 14px;
+    line-height: 24px;
+}
+.number-h1 {
+    font-size: 36px;
+}
+.right {
+    float: right;
+    display: inline-block;
+}

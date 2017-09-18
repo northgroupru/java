@@ -3,15 +3,24 @@ package ru.proitr.example.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.SortDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import ru.proitr.example.conversion.test.TestDataConverter;
+import ru.proitr.example.conversion.test.TestDataConverterConfiguration;
 import ru.proitr.example.domain.auth.RolesEnum;
 import ru.proitr.example.domain.test.TestData;
+import ru.proitr.example.model.dto.table.TableColumnDto;
+import ru.proitr.example.model.dto.table.TableHeaderDto;
 import ru.proitr.example.repository.test.TestDataRepository;
+import ru.proitr.example.repository.test.TestDataSpecification;
 import ru.proitr.example.service.test.TestService;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -21,6 +30,7 @@ import java.util.List;
 @RequestMapping("/test")
 public class TestController
 {
+	@Autowired private TestDataConverter testDataConverter;
 	@Autowired private TestService testService;
 	@Autowired private TestDataRepository testDataRepository;
 
@@ -81,11 +91,44 @@ public class TestController
 	}
 
 	@RequestMapping(value = {"/table", "/"})
-	public String drawTable(Model mv, @PageableDefault(page = 0, size = 15) Pageable pageable)
+	public String drawTable(
+			Model mv,
+			@RequestParam(value = "userId", required = false) String userId,
+			@RequestParam(value = "lessValueInt", required = false) Integer lessValueInt,
+			@PageableDefault(size = 20) @SortDefault(sort = "valInt", direction = Sort.Direction.ASC) Pageable pageable)
 	{
 		mv.addAttribute("title", "Example table.");
 
-		Page<TestData> testData = testDataRepository.findTestDataValInt30(pageable);
+		Sort.Order sortOrder = pageable.getSort().iterator().next();
+
+		mv.addAttribute("sortDirection", sortOrder.getDirection());
+		mv.addAttribute("sortProperty", sortOrder.getProperty());
+
+		TableHeaderDto tableHeaderDto = new TableHeaderDto(
+				Arrays.asList(
+						new TableColumnDto("id"),
+						new TableColumnDto("userId"),
+						new TableColumnDto("valInt"),
+						new TableColumnDto("valString"),
+						new TableColumnDto("resultInt"),
+						new TableColumnDto("resultString")
+				),
+				"/test/table",
+				"page=" + pageable.getPageNumber() + "&size=" + pageable.getPageSize()
+				+ (userId != null ? "&userId=" + userId : "")
+				+ (lessValueInt != null ? "&lessValueInt=" + lessValueInt.toString() : ""),
+				sortOrder
+		);
+
+		mv.addAttribute("tableHeader", tableHeaderDto);
+
+		TestDataSpecification testDataSpecification = new TestDataSpecification(lessValueInt, userId);
+
+		Page<TestData> testData = testDataRepository.findAll(testDataSpecification, pageable);
+
+		TestDataConverterConfiguration testDataConverterConfiguration = new TestDataConverterConfiguration(true, true);
+		mv.addAttribute("testDataConverterConfiguration", testDataConverterConfiguration);
+		mv.addAttribute("testData", testDataConverter.convert(testData, testDataConverterConfiguration));
 
 		return "freemarker/test/table";
 	}

@@ -10,6 +10,7 @@
     <li><a href="/registration">Регистрация</a></li>
     <li><a href="/test/caching">Пример работы с cache</a></li>
     <li><a href="/test/rest/generateData">Сгенерировать 100 записей в t_data</a></li>
+    <li><a href="/test/table">Пример работы с таблицей</a></li>
 </ul>
 
 <#if (user??)>

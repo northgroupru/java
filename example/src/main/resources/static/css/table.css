@@ -1,0 +1,33 @@
+.ui-table .table-row:not(.first):hover .table-cell .name-line a {
+    color: #00aeef;
+}
+.ui-table .table-row .table-cell:first-child {
+    white-space: nowrap;
+}
+.ui-table .table-cell .checkbox-label {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.ui-table .pop.moved {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 24px;
+    position: relative;
+    top: auto;
+    left: auto;
+}
+.ui-table .pop.moved .pop-toggle {
+    width: 20px;
+    height: 18px;
+    position: relative;
+}
+.ui-table .pop.moved .pop-toggle .icon{
+    position: absolute;
+    top: -3px;
+    display: block;
+    left: -2px;
+}
+.ui-table .table-row .table-cell:nth-child(2) {
+    padding-left: 0;
+}
