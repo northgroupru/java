@@ -108,8 +108,8 @@ public class TestController
 				Arrays.asList(
 						new TableColumnDto("id"),
 						new TableColumnDto("userId"),
-						new TableColumnDto("valInt"),
-						new TableColumnDto("valString"),
+						new TableColumnDto("valInt", "valInt"),
+						new TableColumnDto("valString", "valString"),
 						new TableColumnDto("resultInt"),
 						new TableColumnDto("resultString")
 				),
@@ -129,6 +129,8 @@ public class TestController
 		TestDataConverterConfiguration testDataConverterConfiguration = new TestDataConverterConfiguration(true, true);
 		mv.addAttribute("testDataConverterConfiguration", testDataConverterConfiguration);
 		mv.addAttribute("testData", testDataConverter.convert(testData, testDataConverterConfiguration));
+		mv.addAttribute("userIdFilter", userId);
+		mv.addAttribute("lessValueIntFilter", lessValueInt);
 
 		return "freemarker/test/table";
 	}

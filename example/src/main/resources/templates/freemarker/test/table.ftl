@@ -96,7 +96,14 @@ Table test data:
     </#list>
 </div>
 
+<#if (userIdFilter??)>
+    <#assign userIdF = '&userId=' + userIdFilter>
+</#if>
 
-<@paginate "/test/table?sort=${sortProperty!},${sortDirection!}", testData.number, testData.totalPages, testData.size/>
+<#if (lessValueIntFilter??)>
+    <#assign lessValueIntF = '&lessValueInt=' + lessValueIntFilter>
+</#if>
+
+<@paginate "/test/table?sort=${sortProperty!},${sortDirection!}${userIdF}${lessValueIntF}", testData.number, testData.totalPages, testData.size/>
 </body>
 </html>
